@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humanity Airdrop Calculator</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+        }
+
+        .centered-table {
+            width: 90%;
+            margin: 2rem auto;
+            border-collapse: separate;
+            border-spacing: 0;
+            transform: perspective(1000px) rotateX(5deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 191, 255, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            background: linear-gradient(145deg, #0f3460, #1a1a2e);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        th {
+            background: linear-gradient(45deg, #00b4d8, #0077b6);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transform: translateZ(10px);
+        }
+
+        tr:hover td {
+            background: rgba(255,255,255,0.05);
+            transform: translateZ(5px);
+        }
+
+        .input-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        input {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #00b4d8;
+            border-radius: 25px;
+            padding: 12px 30px;
+            color: #fff;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.5);
+            transform: scale(1.05) translateZ(5px);
+        }
+
+        button {
+            background: linear-gradient(45deg, #00b4d8, #0077b6);
+            border: none;
+            padding: 12px 30px;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 180, 216, 0.4);
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.2em;
+            color: #00b4d8;
+            margin: 20px 0;
+        }
+
+        td {
+            position: relative;
+        }
+
+        td::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00b4d8, transparent);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotateX(5deg); }
+            50% { transform: translateY(-10px) rotateX(5deg); }
+            100% { transform: translateY(0px) rotateX(5deg); }
+        }
+
+        .centered-table {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>$H Airdrop Calculation Table</h1>
+    <p>$H token : 0.11 USDT (based on its valuation of 1.1B)</p>
+    <div class="input-section">
+        <label for="rwt-input">Enter your RWT number : </label>
+        <input type="number" id="rwt-input" placeholder="Enter your RWT" min="0">
+        <button id="calculate-btn">Calculate</button>
+    </div>
+    <table class="centered-table">
+        <thead>
+            <tr>
+                <th>Allocation Percentage (%)</th>
+                <th>Total Airdrop Tokens</th>
+                <th>$H Tokens for You</th>
+                <th>Airdrop Value in USDT</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>100,000,000</td><td id="h-1">-</td><td id="usdt-1">-</td></tr>
+            <tr><td>2</td><td>200,000,000</td><td id="h-2">-</td><td id="usdt-2">-</td></tr>
+            <tr><td>3</td><td>300,000,000</td><td id="h-3">-</td><td id="usdt-3">-</td></tr>
+            <tr><td>4</td><td>400,000,000</td><td id="h-4">-</td><td id="usdt-4">-</td></tr>
+            <tr><td>5</td><td>500,000,000</td><td id="h-5">-</td><td id="usdt-5">-</td></tr>
+            <tr><td>6</td><td>600,000,000</td><td id="h-6">-</td><td id="usdt-6">-</td></tr>
+            <tr><td>7</td><td>700,000,000</td><td id="h-7">-</td><td id="usdt-7">-</td></tr>
+            <tr><td>8</td><td>800,000,000</td><td id="h-8">-</td><td id="usdt-8">-</td></tr>
+            <tr><td>9</td><td>900,000,000</td><td id="h-9">-</td><td id="usdt-9">-</td></tr>
+            <tr><td>10</td><td>1,000,000,000</td><td id="h-10">-</td><td id="usdt-10">-</td></tr>
+            <tr><td>11</td><td>1,100,000,000</td><td id="h-11">-</td><td id="usdt-11">-</td></tr>
+            <tr><td>12</td><td>1,200,000,000</td><td id="h-12">-</td><td id="usdt-12">-</td></tr>
+        </tbody>
+    </table>
+
+    <script>
+        let currentRWTHoldings;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const storedValue = localStorage.getItem('rwtHoldings');
+            if (storedValue) {
+                currentRWTHoldings = parseFloat(storedValue);
+            } else {
+                currentRWTHoldings = 77795819097;
+            }
+
+            try {
+                const newValue = await fetchRWTHoldings();
+                currentRWTHoldings = newValue;
+                localStorage.setItem('rwtHoldings', newValue.toString());
+            } catch (error) {
+                console.error('Failed to fetch RWT holdings:', error);
+            }
+
+            const calculateBtn = document.getElementById('calculate-btn');
+            calculateBtn.addEventListener('click', updateTable);
+        });
+
+        async function fetchRWTHoldings() {
+            const response = await fetch('https://explorer.testnet.humanity.org/api/v2/tokens/0x693cB8de384f00A5c2580D544B38013BFB496529/holders');
+            const data = await response.json();
+            const targetAddress = "0xa18f6FCB2Fd4884436d10610E69DB7BFa1bFe8C7";
+            const holder = data.items.find(item => item.address.hash.toLowerCase() === targetAddress.toLowerCase());
+            if (holder) {
+                const valueInWei = BigInt(holder.value);
+                return parseFloat(valueInWei.toString()) / 1e18;
+            }
+            throw new Error('Address not found');
+        }
+
+        function updateTable() {
+            const rwtInput = document.getElementById('rwt-input');
+            const rwt = parseFloat(rwtInput.value);
+            const totalSupply = 10000000000;
+            const constant = 88888888888 - currentRWTHoldings;
+
+            if (isNaN(rwt) || rwt < 0) {
+                alert('Please enter a valid non-negative RWT value.');
+                return;
+            }
+
+            for (let p = 1; p <= 12; p++) {
+                const percentage = p;
+                const airdropAmount = totalSupply * (percentage / 100);
+                const denominator = constant / airdropAmount;
+                const h = rwt / denominator;
+                const hCell = document.getElementById(`h-${p}`);
+                hCell.textContent = h.toFixed(4);
+
+                const usdt = h * 0.11;
+                const usdtCell = document.getElementById(`usdt-${p}`);
+                usdtCell.textContent = usdt.toFixed(2);
+            }
+        }
+    </script>
+</body>
+</html>
