@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Humanity Airdrop Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: #fff;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Lexend', sans-serif;
             min-height: 100vh;
             margin: 0;
             padding: 20px;
@@ -16,21 +17,28 @@
 
         h1 {
             text-align: center;
-            font-size: 2.5em;
+            font-size: 2em;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 2rem 0;
+            -webkit-overflow-scrolling: touch;
         }
 
         .centered-table {
             width: 90%;
-            margin: 2rem auto;
+            margin: 0 auto;
             border-collapse: separate;
             border-spacing: 0;
-            transform: perspective(1000px) rotateX(5deg);
             box-shadow: 0 25px 50px -12px rgba(0, 191, 255, 0.3);
             border-radius: 15px;
             overflow: hidden;
             background: linear-gradient(145deg, #0f3460, #1a1a2e);
+            min-width: 600px;
         }
 
         th, td {
@@ -45,35 +53,40 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
-            position: relative;
-            transform: translateZ(10px);
         }
 
         tr:hover td {
             background: rgba(255,255,255,0.05);
-            transform: translateZ(5px);
         }
 
         .input-section {
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
             margin: 40px 0;
+        }
+
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            width: 100%;
+            max-width: 500px;
         }
 
         input {
             background: rgba(255,255,255,0.1);
             border: 2px solid #00b4d8;
             border-radius: 25px;
-            padding: 12px 30px;
+            padding: 12px 20px;
             color: #fff;
-            font-size: 1.1em;
+            font-size: 1em;
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
-        }
-
-        input:focus {
-            outline: none;
-            box-shadow: 0 0 15px rgba(0, 180, 216, 0.5);
-            transform: scale(1.05) translateZ(5px);
+            flex: 1 1 200px;
+            min-width: 200px;
         }
 
         button {
@@ -87,11 +100,7 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
-
-        button:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 180, 216, 0.4);
+            flex: 1 1 auto;
         }
 
         p {
@@ -101,28 +110,50 @@
             margin: 20px 0;
         }
 
-        td {
-            position: relative;
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .centered-table {
+                width: 98%;
+                min-width: unset;
+            }
+
+            th, td {
+                padding: 12px;
+                font-size: 0.9em;
+            }
+
+            .input-group {
+                width: 90%;
+            }
+
+            input, button {
+                width: 100%;
+                flex: none;
+            }
         }
 
-        td::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #00b4d8, transparent);
-        }
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
 
-        @keyframes float {
-            0% { transform: translateY(0px) rotateX(5deg); }
-            50% { transform: translateY(-10px) rotateX(5deg); }
-            100% { transform: translateY(0px) rotateX(5deg); }
-        }
+            th, td {
+                padding: 10px;
+                font-size: 0.8em;
+            }
 
-        .centered-table {
-            animation: float 6s ease-in-out infinite;
+            input {
+                font-size: 0.9em;
+                padding: 10px 15px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
@@ -130,45 +161,44 @@
     <h1>$H Airdrop Calculation Table</h1>
     <p>$H token : 0.11 USDT (based on its valuation of 1.1B)</p>
     <div class="input-section">
-        <label for="rwt-input">Enter your RWT number : </label>
-        <input type="number" id="rwt-input" placeholder="Enter your RWT" min="0">
-        <button id="calculate-btn">Calculate</button>
+        <div class="input-group">
+            <input type="number" id="rwt-input" placeholder="Enter your RWT" min="0">
+            <button id="calculate-btn">Calculate</button>
+        </div>
     </div>
-    <table class="centered-table">
-        <thead>
-            <tr>
-                <th>Allocation Percentage (%)</th>
-                <th>Total Airdrop Tokens</th>
-                <th>$H Tokens for You</th>
-                <th>Airdrop Value in USDT</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td>1</td><td>100,000,000</td><td id="h-1">-</td><td id="usdt-1">-</td></tr>
-            <tr><td>2</td><td>200,000,000</td><td id="h-2">-</td><td id="usdt-2">-</td></tr>
-            <tr><td>3</td><td>300,000,000</td><td id="h-3">-</td><td id="usdt-3">-</td></tr>
-            <tr><td>4</td><td>400,000,000</td><td id="h-4">-</td><td id="usdt-4">-</td></tr>
-            <tr><td>5</td><td>500,000,000</td><td id="h-5">-</td><td id="usdt-5">-</td></tr>
-            <tr><td>6</td><td>600,000,000</td><td id="h-6">-</td><td id="usdt-6">-</td></tr>
-            <tr><td>7</td><td>700,000,000</td><td id="h-7">-</td><td id="usdt-7">-</td></tr>
-            <tr><td>8</td><td>800,000,000</td><td id="h-8">-</td><td id="usdt-8">-</td></tr>
-            <tr><td>9</td><td>900,000,000</td><td id="h-9">-</td><td id="usdt-9">-</td></tr>
-            <tr><td>10</td><td>1,000,000,000</td><td id="h-10">-</td><td id="usdt-10">-</td></tr>
-            <tr><td>11</td><td>1,100,000,000</td><td id="h-11">-</td><td id="usdt-11">-</td></tr>
-            <tr><td>12</td><td>1,200,000,000</td><td id="h-12">-</td><td id="usdt-12">-</td></tr>
-        </tbody>
-    </table>
+    <div class="table-container">
+        <table class="centered-table">
+            <thead>
+                <tr>
+                    <th>Allocation %</th>
+                    <th>Total Airdrop</th>
+                    <th>Your $H Tokens</th>
+                    <th>Value (USDT)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>100M</td><td id="h-1">-</td><td id="usdt-1">-</td></tr>
+                <tr><td>2</td><td>200M</td><td id="h-2">-</td><td id="usdt-2">-</td></tr>
+                <tr><td>3</td><td>300M</td><td id="h-3">-</td><td id="usdt-3">-</td></tr>
+                <tr><td>4</td><td>400M</td><td id="h-4">-</td><td id="usdt-4">-</td></tr>
+                <tr><td>5</td><td>500M</td><td id="h-5">-</td><td id="usdt-5">-</td></tr>
+                <tr><td>6</td><td>600M</td><td id="h-6">-</td><td id="usdt-6">-</td></tr>
+                <tr><td>7</td><td>700M</td><td id="h-7">-</td><td id="usdt-7">-</td></tr>
+                <tr><td>8</td><td>800M</td><td id="h-8">-</td><td id="usdt-8">-</td></tr>
+                <tr><td>9</td><td>900M</td><td id="h-9">-</td><td id="usdt-9">-</td></tr>
+                <tr><td>10</td><td>1B</td><td id="h-10">-</td><td id="usdt-10">-</td></tr>
+                <tr><td>11</td><td>1.1B</td><td id="h-11">-</td><td id="usdt-11">-</td></tr>
+                <tr><td>12</td><td>1.2B</td><td id="h-12">-</td><td id="usdt-12">-</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <script>
         let currentRWTHoldings;
 
         document.addEventListener('DOMContentLoaded', async () => {
             const storedValue = localStorage.getItem('rwtHoldings');
-            if (storedValue) {
-                currentRWTHoldings = parseFloat(storedValue);
-            } else {
-                currentRWTHoldings = 77795819097;
-            }
+            currentRWTHoldings = storedValue ? parseFloat(storedValue) : 77795819097;
 
             try {
                 const newValue = await fetchRWTHoldings();
@@ -178,8 +208,7 @@
                 console.error('Failed to fetch RWT holdings:', error);
             }
 
-            const calculateBtn = document.getElementById('calculate-btn');
-            calculateBtn.addEventListener('click', updateTable);
+            document.getElementById('calculate-btn').addEventListener('click', updateTable);
         });
 
         async function fetchRWTHoldings() {
@@ -210,12 +239,10 @@
                 const airdropAmount = totalSupply * (percentage / 100);
                 const denominator = constant / airdropAmount;
                 const h = rwt / denominator;
-                const hCell = document.getElementById(`h-${p}`);
-                hCell.textContent = h.toFixed(4);
-
                 const usdt = h * 0.11;
-                const usdtCell = document.getElementById(`usdt-${p}`);
-                usdtCell.textContent = usdt.toFixed(2);
+                
+                document.getElementById(`h-${p}`).textContent = h.toFixed(4);
+                document.getElementById(`usdt-${p}`).textContent = usdt.toFixed(2);
             }
         }
     </script>
