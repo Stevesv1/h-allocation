@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Humanity Airdrop Calculator</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -13,6 +14,8 @@
             min-height: 100vh;
             margin: 0;
             padding: 20px;
+            position: relative;
+            padding-bottom: 60px;
         }
 
         h1 {
@@ -110,6 +113,31 @@
             margin: 20px 0;
         }
 
+        footer {
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 40px;
+            font-family: 'Lexend', sans-serif;
+            color: rgba(255,255,255,0.7);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        footer a {
+            color: #00b4d8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            opacity: 0.9;
+            text-shadow: 0 0 8px rgba(0, 180, 216, 0.4);
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.5em;
@@ -133,6 +161,11 @@
                 width: 100%;
                 flex: none;
             }
+
+            footer {
+                font-size: 0.9em;
+                padding: 20px 15px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -153,6 +186,11 @@
             button {
                 padding: 10px 20px;
                 font-size: 0.9em;
+            }
+
+            footer {
+                font-size: 0.85em;
+                padding: 15px 10px;
             }
         }
     </style>
@@ -192,6 +230,10 @@
             </tbody>
         </table>
     </div>
+
+    <footer>
+        Made with 💚 by <a href="https://x.com/Zun2025" target="_blank" rel="noopener noreferrer">Zun</a>
+    </footer>
 
     <script>
         let currentRWTHoldings;
